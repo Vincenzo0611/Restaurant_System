@@ -1,0 +1,37 @@
+# Ignorowanie plików kompilacji
+/out/
+/target/
+/build/
+*.class
+*.jar
+*.war
+*.ear
+*.log
+*.iml
+*.ipr
+*.iws
+
+# Ignorowanie plików konfiguracyjnych IntelliJ IDEA
+.idea/
+*.iml
+
+# Ignorowanie zależności z Maven i Gradle
+.mvn/
+.gradle/
+*.log
+
+# Ignorowanie plików tymczasowych systemu
+*.swp
+*~
+.DS_Store
+Thumbs.db
+
+# Ignorowanie plików cache i logów
+/log/
+*.log
+
+# Ignorowanie plików środowiskowych
+.env
+
+# Ignorowanie plików testowych
+/test-output/
