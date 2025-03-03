@@ -11,6 +11,8 @@
 *.ipr
 *.iws
 
+.env
+
 # Ignorowanie plików konfiguracyjnych IntelliJ IDEA
 .idea/
 *.iml

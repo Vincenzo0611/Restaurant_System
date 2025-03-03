@@ -40,32 +40,37 @@ public class Obsluga {
 
     public void start() throws FileNotFoundException {
 
-        // Wczytywanie pliku z menu
-        File file = new File("m.txt");
-        Scanner scanner = new Scanner(file);
-
-        int id = 0;
-        Dzial_menu aktualny_dzial = null;
-
-        // Parsowanie pliku i tworzenie działów
-        while (scanner.hasNextLine()) {
-            String nazwa = scanner.nextLine();
-            String k = scanner.nextLine();
-            int kod = Integer.parseInt(k);
-
-            if (kod == 0) {
-                if (aktualny_dzial != null) {
-                    menu.add(aktualny_dzial);
-                }
-                aktualny_dzial = new Dzial_menu(nazwa);
-            } else {
-                aktualny_dzial.produkty.add(new Produkt_z_menu(nazwa, id, kod));
-            }
-            id++;
+        MenuDownload menudownload = new MenuDownload();
+        if(menudownload.downloadMenu()) {
+            menu = menudownload.getMenu();
         }
-        scanner.close();
-        menu.add(aktualny_dzial);
+        else {
+            // Wczytywanie pliku z menu
+            File file = new File("m.txt");
+            Scanner scanner = new Scanner(file);
 
+            int id = 0;
+            Dzial_menu aktualny_dzial = null;
+
+            // Parsowanie pliku i tworzenie działów
+            while (scanner.hasNextLine()) {
+                String nazwa = scanner.nextLine();
+                String k = scanner.nextLine();
+                int kod = Integer.parseInt(k);
+
+                if (kod == 0) {
+                    if (aktualny_dzial != null) {
+                        menu.add(aktualny_dzial);
+                    }
+                    //aktualny_dzial = new Dzial_menu(nazwa);
+                } else {
+                    aktualny_dzial.produkty.add(new Produkt_z_menu(nazwa, id, kod));
+                }
+                id++;
+            }
+            scanner.close();
+            menu.add(aktualny_dzial);
+        }
         // Tworzenie okna podzielonego na pół
         frame = new JFrame("Host");
         frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
@@ -472,9 +477,10 @@ public class Obsluga {
         topPanel.add(removeButton);
 
         // Pole notatki
-        JTextArea noteArea = new JTextArea(product.getNotatka() != null ? product.getNotatka() : "", 3, 20); // Mniejsza liczba kolumn dla mniej rozciągniętego pola
+        JTextArea noteArea = new JTextArea(product.getNotatka() != null ? product.getNotatka() : "", 2, 20); // Mniejsza liczba kolumn dla mniej rozciągniętego pola
         noteArea.setLineWrap(true);
         noteArea.setWrapStyleWord(true);
+        noteArea.setFont(new Font("Arial", Font.PLAIN, 24));
         JScrollPane scrollPane = new JScrollPane(noteArea); // Dodanie przewijania do notatki
 
         // Ustawianie stałej wysokości i szerokości
@@ -724,7 +730,7 @@ public class Obsluga {
 
         // Panel dla produktów
         JPanel productsPanel = new JPanel();
-        productsPanel.setLayout(new GridLayout(paragon.getProducts().size(), 1)); // GridLayout dla produktów
+        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS)); // GridLayout dla produktów
 
         // Dodanie produktów do panelu
         for (Produkt_na_paragonie produkt : paragon.getProducts()) {
@@ -798,10 +804,11 @@ public class Obsluga {
             productPanel.add(buttonPanel, BorderLayout.EAST); // Dodanie panelu z przyciskiem
 
             productsPanel.add(productPanel);
+            productsPanel.add(Box.createVerticalStrut(2)); // Dystans między tekstami
         }
 
         // Dodanie produktów do głównego panelu
-        panel.add(productsPanel, BorderLayout.CENTER);
+        panel.add(productsPanel, BorderLayout.NORTH);
 
         // Dodanie przycisku usuwania paragonu
         JButton removeButton = new JButton("Usuń paragon");

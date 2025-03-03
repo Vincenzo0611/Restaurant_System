@@ -51,12 +51,12 @@ public class Historia_All extends JFrame {
 
         // Utworzenie obramowania z większą czcionką
         Font titleFont = new Font("Arial", Font.BOLD, 28);
-        TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Stolik: " + paragon.getNumer_stolika()+ " " + paragon.getKelner());
+        TitledBorder border = BorderFactory.createTitledBorder(BorderFactory.createLineBorder(Color.BLACK), "Stolik: " + paragon.getNumer_stolika() + " " + paragon.getKelner());
         border.setTitleFont(titleFont);
         panel.setBorder(border);
 
         // Tworzenie subtytułu
-        JLabel subtitleLabel = new JLabel(paragon.getCreate_time()+ " - " + paragon.getDestroy_time());
+        JLabel subtitleLabel = new JLabel(paragon.getCreate_time() + " - " + paragon.getDestroy_time());
         subtitleLabel.setFont(new Font("Arial", Font.PLAIN, 20));
         subtitleLabel.setHorizontalAlignment(SwingConstants.CENTER);  // Wyrównanie do środka
 
@@ -80,8 +80,7 @@ public class Historia_All extends JFrame {
             productTextArea.setLineWrap(true);
             productTextArea.setBackground(Color.WHITE);
 
-            if(produkt.getCzas_wydania() != null)
-            {
+            if (produkt.getCzas_wydania() != null) {
                 productTextArea.setForeground(Color.WHITE);
                 productTextArea.setBackground(Color.decode("#FF7F7F"));
                 productTextArea.append(produkt.getCzas_wydania());
@@ -100,7 +99,7 @@ public class Historia_All extends JFrame {
         // Dodanie przycisku usuwania paragonu
         JButton removeButton = new JButton("Cofnij paragon");
         removeButton.setFont(new Font("Arial", Font.BOLD, 16));
-        removeButton.setPreferredSize(new Dimension(180, 40)); // Ustawienie stałej wysokości
+        removeButton.setPreferredSize(new Dimension(160, 40)); // Ustawienie stałej wysokości
         removeButton.setBackground(Color.GRAY);
         removeButton.setForeground(Color.lightGray);
 
@@ -108,8 +107,21 @@ public class Historia_All extends JFrame {
             okno_glowne.addParagonFromHistory(paragon);
             dispose();
         });
-
         JPanel buttonPanelBottom = new JPanel(new FlowLayout(FlowLayout.RIGHT)); // FlowLayout dla przycisku usuwania
+        if (paragon.isZaplacony())
+        {
+            JButton backPaymentButton = new JButton("<html>Cofnij<br>płatność</html>");
+            backPaymentButton.setFont(new Font("Arial", Font.BOLD, 16));
+            backPaymentButton.setPreferredSize(new Dimension(90, 40)); // Ustawienie stałej wysokości
+            backPaymentButton.setBackground(Color.WHITE);
+            //backPaymentButton.setForeground(Color.);
+
+            backPaymentButton.addActionListener(e -> {
+                paragon.setZaplacony(false);
+                dispose();
+            });
+            buttonPanelBottom.add(backPaymentButton);
+        }
         buttonPanelBottom.add(removeButton);
         panel.add(buttonPanelBottom, BorderLayout.SOUTH); // Dodanie panelu z przyciskiem na dół
         return panel;

@@ -72,7 +72,7 @@ public class Platnosc extends JFrame {
         panel.add(subtitleLabel, BorderLayout.NORTH);
         // Panel dla produktów
         JPanel productsPanel = new JPanel();
-        productsPanel.setLayout(new GridLayout(paragon.getProducts().size(), 1)); // GridLayout dla produktów
+        productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS)); // GridLayout dla produktów
 
         // Dodanie produktów do panelu
         for (Produkt_na_paragonie produkt : paragon.getProducts()) {
@@ -111,10 +111,11 @@ public class Platnosc extends JFrame {
             productPanel.add(kodTextArea);
 
             productsPanel.add(productPanel);
+            productsPanel.add(Box.createVerticalStrut(2)); // Dystans między tekstami
         }
 
         // Dodanie produktów do głównego panelu
-        panel.add(productsPanel, BorderLayout.CENTER);
+        panel.add(productsPanel, BorderLayout.NORTH);
 
         // Dodanie przycisku usuwania paragonu
         JButton removeButton = new JButton("Zapłać");

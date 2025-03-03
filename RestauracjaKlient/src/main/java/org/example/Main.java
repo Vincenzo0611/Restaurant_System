@@ -71,6 +71,8 @@ public class Main extends JFrame {
             tcpSocket = new Socket(serverIP, 12345);
             logMessage("Połączono z serwerem TCP.");
 
+            tcpSocket.setSoTimeout(10000); // 10 sekund na timeout odczytu
+
             klient = new Klient_Main(tcpSocket);
 
             // Uruchamiamy nasłuchiwanie wiadomości od serwera
@@ -123,7 +125,6 @@ public class Main extends JFrame {
                 } catch (EOFException | SocketException e) {
                     System.out.println("Serwer zamknął połączenie: " + e.getMessage());
                     attemptReconnect();
-                    return;
                 }
             }
         } catch (ClassNotFoundException | IOException e) {
