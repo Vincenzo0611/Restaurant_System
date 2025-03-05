@@ -50,6 +50,7 @@ public class MenuDownload {
                 UUID section_id = bytesToUuid(binaryData);
                 String name = menu_sections.getString("name");
                 int code = menu_sections.getInt("code");
+                int display_order = menu_sections.getInt("display_order");
 
                 System.out.println("ID: " + id + ", Name: " + name + ", code: " + code + ", section_id: " + section_id);
 
@@ -59,7 +60,7 @@ public class MenuDownload {
                 // Sprawdzenie, czy znaleziono dział menu
                 if (dzialMenu.isPresent()) {
                     Dzial_menu znalezionyDzial = dzialMenu.get();
-                    znalezionyDzial.produkty.add(new Produkt_z_menu(name, id, code));
+                    znalezionyDzial.produkty.add(new Produkt_z_menu(name, id, code,display_order, znalezionyDzial.getDisplay_order()));
                 } else {
                     System.out.println("Dział menu o podanym id nie został znaleziony.");
                     return false;
@@ -67,6 +68,10 @@ public class MenuDownload {
 
             }
             menu.sort(Comparator.comparingInt(Dzial_menu::getDisplay_order));
+            for(Dzial_menu dzial_menu : menu)
+            {
+                dzial_menu.produkty.sort(Comparator.comparingInt(Produkt_z_menu::getDisplay_order));
+            }
             return true;
         } catch (SQLException e) {
             System.out.println("Błąd SQL: " + e.getMessage());

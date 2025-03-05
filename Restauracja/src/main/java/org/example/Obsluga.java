@@ -2,12 +2,9 @@ package org.example;
 
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -46,7 +43,7 @@ public class Obsluga {
         }
         else {
             // Wczytywanie pliku z menu
-            File file = new File("m.txt");
+            File file = new File("org/example/m.txt");
             Scanner scanner = new Scanner(file);
 
             int id = 0;
@@ -64,7 +61,7 @@ public class Obsluga {
                     }
                     //aktualny_dzial = new Dzial_menu(nazwa);
                 } else {
-                    aktualny_dzial.produkty.add(new Produkt_z_menu(nazwa, id, kod));
+                    aktualny_dzial.produkty.add(new Produkt_z_menu(nazwa, id, kod, id, 1));
                 }
                 id++;
             }
@@ -548,8 +545,9 @@ public class Obsluga {
         if(aktualny.getCreate_time() == null) {
             aktualny.setCreate_time(formattedTime);
         }
+        aktualny.getProducts().sort(Comparator.comparingInt(Produkt_na_paragonie::getSection_display_order)
+                .thenComparingInt(Produkt_na_paragonie::getDisplay_order));
 
-        aktualny.getProducts().sort(Comparator.comparingInt(Produkt_na_paragonie::getId));
 
         paragons_all.add(aktualny);
         paragons_waiting.add(aktualny);

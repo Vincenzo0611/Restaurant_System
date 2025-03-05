@@ -11,14 +11,14 @@ public class Produkt_na_paragonie extends Produkt_z_menu implements Serializable
 
     public Produkt_na_paragonie(Produkt_z_menu produkt, int numer)
     {
-        super(produkt.getNazwa(), produkt.getId(), produkt.getKod_z_kasy());
+        super(produkt.getNazwa(), produkt.getId(), produkt.getKod_z_kasy(), produkt.getDisplay_order(), produkt.getSection_display_order());
         this.numer_na_paragonie = numer;
         this.czas_wydania = null;
     }
 
-    public Produkt_na_paragonie(String nazwa, int id, int kod_kasy, int numer)
+    public Produkt_na_paragonie(String nazwa, int id, int kod_kasy, int numer, int display_order)
     {
-        super(nazwa, id, kod_kasy);
+        super(nazwa, id, kod_kasy, display_order, 1);
         this.numer_na_paragonie = numer;
         this.czas_wydania = null;
     }

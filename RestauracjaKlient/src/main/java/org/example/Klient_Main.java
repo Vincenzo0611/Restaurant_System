@@ -159,7 +159,7 @@
             panel.add(subtitleLabel, BorderLayout.NORTH);
             // Panel dla produktów
             JPanel productsPanel = new JPanel();
-            productsPanel.setLayout(new GridLayout(paragon.getProducts().size(), 1)); // GridLayout dla produktów
+            productsPanel.setLayout(new BoxLayout(productsPanel, BoxLayout.Y_AXIS)); // GridLayout dla produktów
 
             // Dodanie produktów do panelu
             for (Produkt_na_paragonie produkt : paragon.getProducts()) {
@@ -187,6 +187,7 @@
                 productPanel.add(productTextArea, BorderLayout.CENTER);
 
                 productsPanel.add(productPanel);
+                productsPanel.add(Box.createVerticalStrut(2)); // Dystans między tekstami
             }
 
             // Dodanie produktów do głównego panelu
