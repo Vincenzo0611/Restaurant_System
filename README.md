@@ -57,6 +57,8 @@ The system was developed as a freelance solution for a company to streamline res
 6. Ensure that both applications are connected via the same network for TCP/IP communication.
 
 ## 📸 Screenshots
+![Host](https://github.com/user-attachments/assets/724ec8cb-76bc-40aa-bd45-c1331936034c)
+![Client](https://github.com/user-attachments/assets/d13dfde8-b3a0-449e-8040-1fea1c6d617e)
 
 
 ## 🔮 Future Enhancements
