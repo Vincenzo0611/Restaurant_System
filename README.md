@@ -32,30 +32,6 @@ The system was developed as a freelance solution for a company to streamline res
 - **Database**: SQL-based (with local `.txt` backup option) 🗄️
 - **UI**: Java Swing 🎨
 
-## 🚀 Installation & Running the Application
-
-1. Clone the repository:
-   ```sh
-   git clone https://github.com/Vincenzo0611/Restaurant_System.git
-   ```
-2. Navigate to the project directory:
-   ```sh
-   cd Restaurant_System
-   ```
-3. Compile the Java files:
-   ```sh
-   javac -d bin src/**/*.java
-   ```
-4. Run the Host Application:
-   ```sh
-   java -cp bin com.yourpackage.HostApplication
-   ```
-5. Run the Client Application:
-   ```sh
-   java -cp bin com.yourpackage.ClientApplication
-   ```
-6. Ensure that both applications are connected via the same network for TCP/IP communication.
-
 ## 📸 Screenshots
 ![Host](https://github.com/user-attachments/assets/724ec8cb-76bc-40aa-bd45-c1331936034c)
 ![Client](https://github.com/user-attachments/assets/d13dfde8-b3a0-449e-8040-1fea1c6d617e)
